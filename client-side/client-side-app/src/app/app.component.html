@@ -1,0 +1,36 @@
+<div>
+  <div>
+    <input type="text" >
+  </div>
+  <form *ngFor="let todo_item of filtradora()">
+    <input
+      type="checkbox"
+      [checked]="todo_item.done"
+      (change)="updateValue($event, todo_item.id, 'done')"
+    />
+    <input
+      type="text"
+      [value]="todo_item.description"
+      (change)="updateValue($event, todo_item.id, 'description')"
+    />
+    <input
+      type="date"
+      [value]="todo_item.dueDate"
+      (change)="updateValue($event, todo_item.id, 'dueDate')"
+    />
+    <select
+      matNativeControl
+      required
+      (change)="updateValue($event, todo_item.id, 'priority')"
+    >
+      <option
+        *ngFor="let item of priorities"
+        [value]="item"
+        [selected]="todo_item.priority === item"
+      >
+        {{ item }}
+      </option>
+    </select>
+  </form>
+  <button (click)="addTask()">ADD</button>
+</div>
